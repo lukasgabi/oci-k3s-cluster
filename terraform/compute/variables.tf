@@ -3,11 +3,6 @@ variable "compartment_id" {
   type        = string
 }
 
-variable "tenancy_ocid" {
-  description = "The tenancy OCID."
-  type        = string
-}
-
 variable "cluster_subnet_id" {
   description = "Subnet for the bastion instance"
   type        = string
