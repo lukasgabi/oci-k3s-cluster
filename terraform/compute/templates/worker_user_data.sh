@@ -14,8 +14,8 @@ k3os:
   - kvm
   - nvme
   ntp_servers:
-  - 0.de.pool.ntp.org
-  - 1.de.pool.ntp.org
+  - 0.ch.pool.ntp.org
+  - 1.ch.pool.ntp.org
   server_url: https://${server_1_ip}:6443
   sysctls:
     kernel.kptr_restrict: "1"
