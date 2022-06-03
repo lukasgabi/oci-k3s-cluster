@@ -1,7 +1,7 @@
-output "ad" {
-  value = data.oci_identity_availability_domain.ad_1.name
+output "server_1_ip" {
+  value = oci_core_instance.server_1.public_ip
 }
 
-output "cluster_token" {
-  value = random_string.cluster_token.result
+output "server_2_ip" {
+  value = oci_core_instance.server_2.public_ip
 }

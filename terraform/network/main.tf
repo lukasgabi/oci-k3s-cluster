@@ -70,3 +70,17 @@ resource "oci_core_network_security_group_security_rule" "allow_ssh" {
   }
   direction = "INGRESS"
 }
+
+resource "oci_core_network_security_group_security_rule" "allow_control_plane" {
+  network_security_group_id = oci_core_network_security_group.this.id
+  protocol                  = "6" // TCP
+  source                    = "0.0.0.0/0"
+  source_type               = "CIDR_BLOCK"
+  tcp_options {
+    destination_port_range {
+      max = 6443
+      min = 6443
+    }
+  }
+  direction = "INGRESS"
+}

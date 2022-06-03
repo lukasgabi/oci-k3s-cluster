@@ -18,6 +18,11 @@ variable "ssh_authorized_keys" {
   type        = list(any)
 }
 
+variable "k3s_tls_san" {
+  description = "k3s tls san used for external access"
+  type        = string
+}
+
 variable "master_1_user_data" {
   description = "Commands to be ran at boot for the bastion instance. Default installs Kali headless"
   type        = string

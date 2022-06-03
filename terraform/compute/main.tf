@@ -31,6 +31,20 @@ locals {
   }
 }
 
+data "oci_identity_availability_domain" "ad_1" {
+  compartment_id = var.compartment_id
+  ad_number      = 1
+}
+
+resource "random_string" "cluster_token" {
+  length           = 48
+  special          = true
+  number           = true
+  lower            = true
+  upper            = true
+  override_special = "^@~*#%/.+:;_"
+}
+
 resource "oci_core_instance" "server_1" {
   compartment_id      = var.compartment_id
   availability_domain = data.oci_identity_availability_domain.ad_1.name
@@ -59,8 +73,14 @@ resource "oci_core_instance" "server_1" {
           ssh_public_key = var.ssh_authorized_keys[0],
           token          = random_string.cluster_token.result,
           k3os_image     = local.server_instance_config.k3os_image
+          tls_san        = var.k3s_tls_san
       })
     )
+  }
+  lifecycle {
+    ignore_changes = [
+      availability_domain
+    ]
   }
 }
 
@@ -97,8 +117,14 @@ resource "oci_core_instance" "server_2" {
           ssh_public_key = var.ssh_authorized_keys[0],
           token          = random_string.cluster_token.result,
           k3os_image     = local.server_instance_config.k3os_image
+          tls_san        = var.k3s_tls_san
       })
     )
+  }
+  lifecycle {
+    ignore_changes = [
+      availability_domain
+    ]
   }
 }
 
@@ -136,5 +162,10 @@ resource "oci_core_instance" "worker" {
           token          = random_string.cluster_token.result,
           k3os_image     = local.worker_instance_config.k3os_image
     }))
+  }
+  lifecycle {
+    ignore_changes = [
+      availability_domain
+    ]
   }
 }

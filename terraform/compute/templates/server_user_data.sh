@@ -14,12 +14,13 @@ k3os:
   - server
   - --cluster-init       # <-- When running a multi server cluster (only add this to the first node of the cluster!)
   - --node-ip=${server_1_ip} # <-- Private network IP of this machine
+  - --tls-san=${tls_san}
   modules:
   - kvm
   - nvme
   ntp_servers:
-  - 0.de.pool.ntp.org
-  - 1.de.pool.ntp.org
+  - 0.ch.pool.ntp.org
+  - 1.ch.pool.ntp.org
   sysctls:
     kernel.kptr_restrict: "1"
     kernel.printk: 4 4 1 7
@@ -36,13 +37,14 @@ k3os:
   k3s_args:
   - server
   - --server
+  - --tls-san=${tls_san}
   - https://${server_1_ip}:6443
   modules:
   - kvm
   - nvme
   ntp_servers:
-  - 0.de.pool.ntp.org
-  - 1.de.pool.ntp.org
+  - 0.ch.pool.ntp.org
+  - 1.ch.pool.ntp.org
   sysctls:
     kernel.kptr_restrict: "1"
     kernel.printk: 4 4 1 7
