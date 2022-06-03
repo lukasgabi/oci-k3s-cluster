@@ -1,5 +1,5 @@
 output "ad" {
-  value = data.oci_identity_availability_domain.ad_2.name
+  value = data.oci_identity_availability_domain.ad_1.name
 }
 
 output "cluster_token" {

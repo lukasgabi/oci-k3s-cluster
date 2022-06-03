@@ -1,6 +1,39 @@
+locals {
+  server_instance_config = {
+    shape_id = "VM.Standard.A1.Flex"
+    ocpus    = 2
+    ram      = 12
+    // Canonical-Ubuntu-20.04-aarch64-2021.12.01-0
+    source_id   = "ocid1.image.oc1.eu-zurich-1.aaaaaaaaeyxjpvayorruw2jr6abmpltxyxw2xj4umg5ciycpdhpvpimom2qq"
+    source_type = "image"
+    server_ip_1 = "10.0.0.11"
+    server_ip_2 = "10.0.0.12"
+    // release: v0.21.5-k3s2r1
+    k3os_image = "https://github.com/rancher/k3os/releases/download/v0.21.5-k3s2r1/k3os-arm64.iso"
+    metadata = {
+      "ssh_authorized_keys" = join("\n", var.ssh_authorized_keys)
+    }
+  }
+  worker_instance_config = {
+    shape_id = "VM.Standard.E2.1.Micro"
+    ocpus    = 1
+    ram      = 1
+    // Canonical-Ubuntu-20.04-aarch64-2021.12.01-0
+    source_id   = "ocid1.image.oc1.eu-zurich-1.aaaaaaaagtij76alknlqce5rkagwhxaxfpkolwz7undfxaqz5wd2am6nweqa"
+    source_type = "image"
+    worker_ip_0 = "10.0.0.21"
+    worker_ip_1 = "10.0.0.22"
+    // release: v0.21.5-k3s2r1
+    k3os_image = "https://github.com/rancher/k3os/releases/download/v0.21.5-k3s2r1/k3os-amd64.iso"
+    metadata = {
+      "ssh_authorized_keys" = join("\n", var.ssh_authorized_keys)
+    }
+  }
+}
+
 resource "oci_core_instance" "server_1" {
   compartment_id      = var.compartment_id
-  availability_domain = data.oci_identity_availability_domain.ad_3.name
+  availability_domain = data.oci_identity_availability_domain.ad_1.name
   display_name        = "k3s-server-1"
   shape               = local.server_instance_config.shape_id
   source_details {
@@ -33,7 +66,7 @@ resource "oci_core_instance" "server_1" {
 
 resource "oci_core_instance" "server_2" {
   compartment_id      = var.compartment_id
-  availability_domain = data.oci_identity_availability_domain.ad_3.name
+  availability_domain = data.oci_identity_availability_domain.ad_1.name
   display_name        = "k3s-server-2"
   shape               = local.server_instance_config.shape_id
   source_details {

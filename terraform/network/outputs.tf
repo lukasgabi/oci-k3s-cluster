@@ -14,6 +14,3 @@ output "permit_ssh" {
   value       = oci_core_network_security_group.permit_ssh
 }
 
-output "ad" {
-  value = data.oci_identity_availability_domain.ad.name
-}
