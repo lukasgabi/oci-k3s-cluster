@@ -37,7 +37,6 @@ k3os:
   k3s_args:
   - server
   - --server
-  - --tls-san=${tls_san}
   - https://${server_1_ip}:6443
   modules:
   - kvm
