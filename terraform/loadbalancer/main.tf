@@ -2,7 +2,7 @@ resource "oci_load_balancer_load_balancer" "this" {
   #Required
   compartment_id = var.compartment_id
   display_name   = "k3s-loadbalancer"
-  shape          = "Flexible"
+  shape          = "flexible"
   subnet_ids     = [var.subnet_id]
 
   network_security_group_ids = [oci_core_network_security_group.this.id]
@@ -71,7 +71,7 @@ resource "oci_load_balancer_backend_set" "http" {
   }
   load_balancer_id = oci_load_balancer_load_balancer.this.id
   name             = "k3s-backend-http"
-  policy           = "WEIGHTED ROUND ROBIN"
+  policy           = "ROUND_ROBIN"
 }
 
 resource "oci_load_balancer_backend" "http" {
@@ -97,7 +97,7 @@ resource "oci_load_balancer_backend_set" "https" {
   }
   load_balancer_id = oci_load_balancer_load_balancer.this.id
   name             = "k3s-backend-https"
-  policy           = "WEIGHTED ROUND ROBIN"
+  policy           = "ROUND_ROBIN"
 }
 
 resource "oci_load_balancer_backend" "https" {
@@ -123,7 +123,7 @@ resource "oci_load_balancer_backend_set" "api" {
   }
   load_balancer_id = oci_load_balancer_load_balancer.this.id
   name             = "k3s-backend-api"
-  policy           = "WEIGHTED ROUND ROBIN"
+  policy           = "ROUND_ROBIN"
 }
 
 resource "oci_load_balancer_backend" "api" {
