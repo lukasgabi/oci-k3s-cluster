@@ -21,8 +21,10 @@ locals {
     // Canonical-Ubuntu-20.04-aarch64-2021.12.01-0
     source_id   = "ocid1.image.oc1.eu-zurich-1.aaaaaaaagtij76alknlqce5rkagwhxaxfpkolwz7undfxaqz5wd2am6nweqa"
     source_type = "image"
-    worker_ip_0 = "10.0.0.21"
-    worker_ip_1 = "10.0.0.22"
+    worker_ips = [
+      "10.0.0.13",
+      "10.0.0.14"
+    ]
     // release: v0.21.5-k3s2r1
     k3os_image = "https://github.com/rancher/k3os/releases/download/v0.21.5-k3s2r1/k3os-amd64.iso"
     metadata = {
@@ -147,8 +149,9 @@ resource "oci_core_instance" "worker" {
   }
 
   create_vnic_details {
-    subnet_id = var.cluster_subnet_id
-    nsg_ids   = [var.permit_ssh_nsg_id]
+    subnet_id  = var.cluster_subnet_id
+    nsg_ids    = [var.permit_ssh_nsg_id]
+    private_ip = local.worker_instance_config.worker_ips[count.index]
   }
 
   metadata = {
