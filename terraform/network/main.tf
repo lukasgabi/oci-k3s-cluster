@@ -57,10 +57,14 @@ resource "oci_core_network_security_group" "this" {
 }
 
 # TODO should be removed
+data "http" "ip" {
+  url = "https://ifconfig.me"
+}
+
 resource "oci_core_network_security_group_security_rule" "allow_ssh" {
   network_security_group_id = oci_core_network_security_group.this.id
   protocol                  = "6" // TCP
-  source                    = "0.0.0.0/0"
+  source                    = "${data.http.ip.body}/32"
   source_type               = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
