@@ -33,3 +33,8 @@ variable "ssh_authorized_keys" {
   description = "List of authorized SSH keys"
   type        = list(any)
 }
+
+variable "k3s_tls_san" {
+  description = "K3s SAN"
+  type        = string
+}
