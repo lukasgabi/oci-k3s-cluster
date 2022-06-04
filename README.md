@@ -14,6 +14,8 @@ terraform plan
 terraform apply -auto-approve
 ```
 
+Get kubeconfig and adjust URL
+
 ## TODOs
 
 - Longhorn setup
