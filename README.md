@@ -4,6 +4,13 @@ OCI K3s Cluster Infrastructure Repository
 
 Guide used: https://github.com/r0b2g1t/k3s-cluster-on-oracle-cloud-infrastructure
 
+## Required tools
+
+- terraform
+- kubectl
+- helm
+- ...
+
 ## Build Cluster
 
 Get an API Key and fill out the tfvars example file, then rename it. Create a reserved public IP and create some DNS Records.
