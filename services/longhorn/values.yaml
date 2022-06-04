@@ -7,9 +7,7 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: "traefik"
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    # Whitelist public IP to restrict access
-    # TODO replace this with something more sensible or disable ingress alltogether
-    ingress.kubernetes.io/whitelist-source-range: "x.x.x.x/32"
+    traefik.ingress.kubernetes.io/router.middlewares: longhorn-system-basic-auth@kubernetescrd
 
   tls:
   - hosts:
