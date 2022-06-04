@@ -24,6 +24,14 @@ terraform apply -auto-approve
 cd ..
 ```
 
+Get a Coffee and wait until everything is deployed, then get the kubeconfig and check access.
+
+``` bash
+kubectl get nodes
+```
+
+The infrastructure should be ready now.
+
 ### Kubernetes
 
 #### Cert Manager
