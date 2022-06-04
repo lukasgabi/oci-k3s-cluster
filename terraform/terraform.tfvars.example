@@ -1,0 +1,15 @@
+compartment_id   = ""
+region           = "eu-zurich-1" // your prefered location
+tenancy_ocid     = ""
+user_ocid        = ""
+fingerprint      = "xx:yy:zz:..."
+private_key      = <<-EOT
+-----BEGIN PRIVATE KEY-----
+...
+-----END PRIVATE KEY-----
+EOT
+# private_key_path = "C:\\Users\\lukas\\.oci\\myvision.pem"
+ssh_authorized_keys = [
+  "key1", 
+  "key2"
+]
