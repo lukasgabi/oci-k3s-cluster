@@ -30,7 +30,7 @@ Get a Coffee and wait until everything is deployed, then get the kubeconfig and 
 kubectl get nodes
 ```
 
-The infrastructure should be ready now.
+The infrastructure should be ready now, get kubeconfig and adjust URL to continue.
 
 ### Kubernetes
 
@@ -60,8 +60,6 @@ kubectl patch storageclass longhorn -p '{"metadata": {"annotations":{"storagecla
 kubectl create namespace nginx
 kubectl apply -f ./services/nginx
 ```
-
-Get kubeconfig and adjust URL
 
 ## TODOs
 
