@@ -4,6 +4,9 @@ metadata:
   name: nginx-ingress
   labels:
     name: nginx
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   rules:
     - host: nginx.k3s.myvision.me
@@ -16,3 +19,7 @@ spec:
                 name: nginx
                 port:
                   number: 80
+  tls:
+  - hosts:
+    - nginx.k3s.myvision.me                   
+    secretName: nginx.k3s.myvision.me-prod-tls
