@@ -1,6 +1,6 @@
 ingress:
   ## Set to true to enable ingress record generation
-  enabled: true
+  enabled: false
 
   host: longhorn.k3s.myvision.me
   
